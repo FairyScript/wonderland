@@ -4,36 +4,45 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun scripts/dev.ts",
+    "dev": "bun run --parallel dev:ui dev:server",
+    "dev:ui": "bunx tsr watch",
+    "dev:server": "bun src/server/index.ts",
     "start": "NODE_ENV=production bun src/server/index.ts",
     "build": "bun run build.ts",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "biome check --fix",
-      "prettier --write"
-    ]
+    "prepare": "husky",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.166.7",
-    "@tanstack/react-router-devtools": "^1.166.7",
+    "@electric-sql/pglite": "^0.4.2",
+    "@tanstack/react-router": "^1.168.10",
+    "@tanstack/react-router-devtools": "^1.166.11",
     "bun-plugin-tailwind": "^0.1.2",
-    "elysia": "^1.4.27",
+    "drizzle-orm": "^1.0.0-beta.18-7eb39f0",
+    "elysia": "^1.4.28",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.6",
-    "@tanstack/router-cli": "^1.166.7",
+    "@tanstack/router-cli": "^1.166.25",
     "@types/bun": "latest",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "bun-plugin-react-compiler": "^0.3.2",
+    "drizzle-kit": "^1.0.0-beta.18-7eb39f0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.3.3",
-    "prettier": "^3.8.1",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "bun run lint:fix",
+      "bun run fmt:check"
+    ]
   }
 }
