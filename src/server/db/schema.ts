@@ -1,4 +1,13 @@
-import { pgTable, text, date, pgEnum, jsonb } from 'drizzle-orm/pg-core'
+import {
+  pgTable,
+  text,
+  date,
+  pgEnum,
+  jsonb,
+  boolean,
+  uuid,
+  varchar,
+} from 'drizzle-orm/pg-core'
 
 export const userStatusEnum = pgEnum('user_status', [
   'active',
@@ -7,32 +16,51 @@ export const userStatusEnum = pgEnum('user_status', [
 ])
 
 export const userTable = pgTable('users', {
-  id: text('id').primaryKey(),
-  name: text('name').notNull(),
-  password: text('password').notNull(),
-  email: text('email').notNull().unique(),
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: varchar('name', { length: 32 }).notNull(),
+  password: varchar('password', { length: 128 }).notNull(),
+  email: varchar('email', { length: 64 }).unique(),
   status: userStatusEnum('status').default('active'),
   createdAt: date('created_at').defaultNow(),
-  invitedBy: text('invited_by').notNull(),
+  invitedBy: uuid('invited_by').notNull(),
 })
 
 export const sessionTable = pgTable('sessions', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   pubKey: text('pubkey').notNull(),
   exp: date('date').defaultNow(),
 })
 
+export const userSessionTable = pgTable('user_sessions', {
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => userTable.id),
+  sessionId: uuid('session_id')
+    .notNull()
+    .unique()
+    .references(() => sessionTable.id),
+})
+
 export const theradTable = pgTable('therads', {
-  id: text('id').primaryKey(),
-  blockId: text('block_id').notNull(),
-  parentId: text('parent_id').notNull(),
-  sessionId: text('session_id').notNull(),
+  id: uuid('id').primaryKey().defaultRandom(),
+  blockId: uuid('block_id').notNull(),
+  parentId: uuid('parent_id').notNull(),
+  sessionId: uuid('session_id')
+    .notNull()
+    .references(() => sessionTable.id),
+  deleted: boolean('deleted').notNull().default(false),
+  feature: jsonb('feature').notNull().default({
+    lock: false,
+    hide: false,
+  }),
 })
 
 export const blockTable = pgTable('blocks', {
-  id: text('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   content: jsonb('content').notNull(),
   createdAt: date('created_at').defaultNow(),
-  sessionId: text('session_id').notNull(),
+  sessionId: uuid('session_id')
+    .notNull()
+    .references(() => sessionTable.id),
   sig: text('sig').notNull(),
 })
