@@ -1,4 +1,4 @@
-import { drizzle } from 'drizzle-orm/pglite'
+import { drizzle } from 'drizzle-orm/bun-sql'
 import { relations } from './relations'
 
 const db = drizzle('data.db', { relations })
