@@ -1,6 +1,7 @@
 import Elysia from 'elysia'
 import index from '../app/index.html'
 import { apiController } from './controller/api'
+import openapi, { fromTypes } from '@elysiajs/openapi'
 
 const app = new Elysia({
   serve: {
@@ -14,6 +15,11 @@ const app = new Elysia({
     },
   },
 })
+  .use(
+    openapi({
+      references: fromTypes(),
+    })
+  )
   .use(apiController)
   .listen(3000)
 

@@ -5,6 +5,7 @@
     "": {
       "name": "bun-react-template",
       "dependencies": {
+        "@elysiajs/openapi": "^1.4.14",
         "@tanstack/react-router": "^1.168.10",
         "@tanstack/react-router-devtools": "^1.166.11",
         "bun-plugin-tailwind": "^0.1.2",
@@ -101,6 +102,8 @@
     "@drizzle-team/brocli": ["@drizzle-team/brocli@0.11.0", "https://mirrors.cloud.tencent.com/npm/@drizzle-team/brocli/-/brocli-0.11.0.tgz", {}, "sha512-hD3pekGiPg0WPCCGAZmusBBJsDqGUR66Y452YgQsZOnkdQ7ViEPKuyP4huUGEZQefp8g34RRodXYmJ2TbCH+tg=="],
 
     "@electric-sql/pglite": ["@electric-sql/pglite@0.4.2", "https://mirrors.cloud.tencent.com/npm/@electric-sql/pglite/-/pglite-0.4.2.tgz", {}, "sha512-1GUUl/MZpy5QWgWisD3Epho3GkJrZ1MzVgQpo2pifQWUs96F9rXKZxeVLPhkwFYck34CH/kQ8lis6wX9ifn3kg=="],
+
+    "@elysiajs/openapi": ["@elysiajs/openapi@1.4.14", "https://mirrors.cloud.tencent.com/npm/@elysiajs/openapi/-/openapi-1.4.14.tgz", { "peerDependencies": { "elysia": ">= 1.4.0" } }, "sha512-kWmJWdvP8/LwHwAJXSpz6xFfYUoyUyEPRimEYABuDU1rOnS27Da1u9T2jyU7frOopxKWV/wDfDxMP8z2xdCPJw=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.12", "https://mirrors.cloud.tencent.com/npm/@esbuild/aix-ppc64/-/aix-ppc64-0.25.12.tgz", { "os": "aix", "cpu": "ppc64" }, "sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA=="],
 

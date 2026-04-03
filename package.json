@@ -16,6 +16,7 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
+    "@elysiajs/openapi": "^1.4.14",
     "@tanstack/react-router": "^1.168.10",
     "@tanstack/react-router-devtools": "^1.166.11",
     "bun-plugin-tailwind": "^0.1.2",

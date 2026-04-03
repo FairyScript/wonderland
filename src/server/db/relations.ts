@@ -7,15 +7,15 @@ export const relations = defineRelations(schema, r => ({
       from: r.userTable.invitedBy,
       to: r.userTable.id,
     }),
-    sessions: r.many.sessionTable({
+    sessions: r.many.biscuitTable({
       from: r.userTable.id,
-      to: r.userSessionTable.userId,
+      to: r.userbiscuitTable.userId,
     }),
   },
-  sessionTable: {
+  biscuitTable: {
     threads: r.many.theradTable({
-      from: r.sessionTable.id,
-      to: r.theradTable.sessionId,
+      from: r.biscuitTable.id,
+      to: r.theradTable.biscuitId,
     }),
   },
   theradTable: {
